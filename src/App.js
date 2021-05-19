@@ -1,24 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+
+import AdminContainer from "./containers/AdminContainer/AdminContainer";
+import SignInContainer from "./containers/AuthContainer/SignInContainer";
+import SignUpContainer from "./containers/AuthContainer/SignUpContainer";
+import HomeContainer from "./containers/HomeContainer/HomeContainer";
+import MobileListContainer from "./containers/MobileListContainer/MobileListContainer";
+import NavBarContainer from "./containers/NavBarContainer/NavBarContainer";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <NavBarContainer />
+      <Switch>
+        <Route exact path="/" component={HomeContainer} />
+        <Route exact path="/admin" component={AdminContainer} />
+        <Route exact path="/listing" component={MobileListContainer} />
+        <Route exact path="/signup" component={SignUpContainer} />
+        <Route exact path="/signin" component={SignInContainer} />
+      </Switch>
+    </BrowserRouter>
   );
 }
 
