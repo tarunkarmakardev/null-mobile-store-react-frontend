@@ -21,12 +21,12 @@ const fetchMobileList =
       }
       if (minPrice) {
         mobileList = mobileList.filter((item) => {
-          return item.info.price >= minPrice;
+          return item.info.price >= parseInt(minPrice);
         });
       }
       if (maxPrice) {
         mobileList = mobileList.filter((item) => {
-          return item.info.price <= maxPrice;
+          return item.info.price <= parseInt(maxPrice);
         });
       }
       dispatch({ type: FETCH_MOBILE_LIST_SUCCESS, payload: mobileList });
