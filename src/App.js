@@ -15,8 +15,20 @@ function App() {
         <Route exact path="/" component={HomeContainer} />
         <Route exact path="/admin" component={AdminContainer} />
         <Route exact path="/listing" component={MobileListContainer} />
-        <Route exact path="/signup" component={SignUpContainer} />
-        <Route exact path="/signin" component={SignInContainer} />
+        <Route
+          exact
+          path="/signup"
+          render={(routeProps) => (
+            <SignUpContainer key={"signup"} {...routeProps} />
+          )}
+        />
+        <Route
+          exact
+          path="/signin"
+          render={(routeProps) => (
+            <SignInContainer key={"signin"} {...routeProps} />
+          )}
+        />
       </Switch>
     </BrowserRouter>
   );

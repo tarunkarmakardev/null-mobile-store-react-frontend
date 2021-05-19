@@ -2,6 +2,7 @@ import {
   SIGN_IN_SUCCESS,
   SIGN_IN_FAILURE,
   SIGN_OUT_SUCCESS,
+  AUTH_RESET,
 } from "../../actions/types";
 
 const initialState = {
@@ -27,6 +28,13 @@ const signInReducer = (state = initialState, action) => {
         isSignedIn: false,
       };
     case SIGN_OUT_SUCCESS:
+      return {
+        ...state,
+        data: null,
+        status: null,
+        isSignedIn: false,
+      };
+    case AUTH_RESET:
       return {
         ...state,
         data: null,

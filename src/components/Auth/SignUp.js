@@ -5,6 +5,9 @@ import { Redirect } from "react-router";
 import Loader from "../Loader/Loader";
 
 export default class Signup extends Component {
+  componentDidMount() {
+    this.props.resetAuth();
+  }
   handleOnSubmit = (values) => {
     this.props.requestSignUp(values);
   };

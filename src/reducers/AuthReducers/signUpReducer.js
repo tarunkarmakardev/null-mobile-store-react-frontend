@@ -1,4 +1,8 @@
-import { SIGN_UP_SUCCESS, SIGN_UP_FAILURE } from "../../actions/types";
+import {
+  SIGN_UP_SUCCESS,
+  SIGN_UP_FAILURE,
+  AUTH_RESET,
+} from "../../actions/types";
 
 const initialState = {
   data: null,
@@ -18,6 +22,12 @@ const signUpReducer = (state = initialState, action) => {
         ...state,
         data: action.payload.data,
         status: action.payload.status,
+      };
+    case AUTH_RESET:
+      return {
+        ...state,
+        data: null,
+        status: null,
       };
     default:
       return { ...state };
