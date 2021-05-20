@@ -1,39 +1,48 @@
-import { ADD_MOBILE_SUCCESS, LOADING_TRUE, LOADING_FALSE } from "../types";
-import { v4 as uuid } from "uuid";
+import {
+  ADD_MOBILE_SUCCESS,
+  ADD_MOBILE_FAILURE,
+  LOADING_TRUE,
+  LOADING_FALSE,
+} from "../types";
+import { refreshToken } from "../AuthActions/refreshToken";
+import mobileStore from "../../api/mobileStore";
 
-const addMobile = (values) => (dispatch) => {
+const addMobile = (values) => async (dispatch) => {
   dispatch({
     type: LOADING_TRUE,
   });
 
-  const { id, mobileName, brandName, color, price, ram, rom } = values;
-  const mobileData = {
-    id,
-    mobileName,
-    brandName,
-    info: {
-      color,
-      price,
-      ram,
-      rom,
+  await dispatch(refreshToken());
+
+  const { mobileName, brandName, color, price, ram, rom } = values;
+  const data = {
+    brand: {
+      name: brandName,
     },
+    name: mobileName,
+    color,
+    price,
+    ram,
+    rom,
   };
-  const brandData = {
-    id: uuid(),
-    name: brandName,
-  };
-  let mobileList = JSON.parse(localStorage.getItem("mobileList")) || [];
-  let brandList = JSON.parse(localStorage.getItem("brandList")) || [];
-  mobileList.push(mobileData);
-  const BrandAlreadyExists = brandList.find(({ name }) => {
-    return name === brandData.name;
-  });
-  if (!BrandAlreadyExists) {
-    brandList.push(brandData);
+  try {
+    const access = localStorage.getItem("access");
+    const response = await mobileStore.post(
+      "/api/products/",
+      JSON.stringify(data),
+      {
+        headers: {
+          Authorization: `Bearer ${access}`,
+        },
+      }
+    );
+    dispatch({ type: ADD_MOBILE_SUCCESS, payload: response });
+  } catch (error) {
+    dispatch({
+      type: ADD_MOBILE_FAILURE,
+      payload: error.response,
+    });
   }
-  localStorage.setItem("mobileList", JSON.stringify(mobileList));
-  localStorage.setItem("brandList", JSON.stringify(brandList));
-  dispatch({ type: ADD_MOBILE_SUCCESS, payload: mobileList });
   dispatch({ type: LOADING_FALSE });
 };
 

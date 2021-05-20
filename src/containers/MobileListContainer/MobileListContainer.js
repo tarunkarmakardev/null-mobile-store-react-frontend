@@ -1,9 +1,21 @@
 import { connect } from "react-redux";
-import { fetchMobileList } from "../../actions";
+import {
+  fetchMobileList,
+  fetchBrandList,
+  filterMobileList,
+} from "../../actions";
 import MobileList from "../../components/MobileLIst/MobileList";
 
-const mapStateToProps = ({ mobileList }) => {
-  return { mobileList };
+const mapStateToProps = ({
+  mobileList,
+  loadingState: { loading },
+  brandList,
+}) => {
+  return { mobileList, loading, brandList };
 };
 
-export default connect(mapStateToProps, { fetchMobileList })(MobileList);
+export default connect(mapStateToProps, {
+  fetchMobileList,
+  fetchBrandList,
+  filterMobileList,
+})(MobileList);

@@ -2,15 +2,6 @@ import React, { Component } from "react";
 import { Field, reduxForm } from "redux-form";
 
 class MobileListFilter extends Component {
-  state = {
-    brands: [],
-  };
-  componentDidMount() {
-    const brands = JSON.parse(localStorage.getItem("brandList")) || [];
-    if (brands.length) {
-      this.setState({ brands });
-    }
-  }
   onFormSubmission = (values) => {
     this.props.onSubmit(values);
   };
@@ -51,8 +42,8 @@ class MobileListFilter extends Component {
     );
   };
   render() {
-    const { handleSubmit, reset } = this.props;
-    const { brands } = this.state;
+    // console.log(this.props);
+    const { handleSubmit, reset, brands } = this.props;
     return (
       <form
         className="row row-cols-lg-auto g-3 align-items-center"

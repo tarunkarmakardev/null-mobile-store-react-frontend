@@ -1,6 +1,6 @@
 import {
-  FETCH_MOBILE_LIST_SUCCESS,
-  FETCH_MOBILE_LIST_FAILURE,
+  FETCH_BRAND_LIST_SUCCESS,
+  FETCH_BRAND_LIST_FAILURE,
 } from "../../actions/types";
 
 const initialState = {
@@ -8,15 +8,15 @@ const initialState = {
   status: null,
 };
 
-const fetchMobileListReducer = (state = initialState, action) => {
+const fetchBrandListReducer = (state = initialState, action) => {
   switch (action.type) {
-    case FETCH_MOBILE_LIST_SUCCESS:
+    case FETCH_BRAND_LIST_SUCCESS:
       return {
         ...state,
         data: action.payload.data,
         status: action.payload.status,
       };
-    case FETCH_MOBILE_LIST_FAILURE:
+    case FETCH_BRAND_LIST_FAILURE:
       return {
         ...state,
         data: action.payload.data,
@@ -27,4 +27,4 @@ const fetchMobileListReducer = (state = initialState, action) => {
   }
 };
 
-export default fetchMobileListReducer;
+export default fetchBrandListReducer;

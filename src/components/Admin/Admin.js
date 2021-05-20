@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import AdminForm from "./AdminForm";
-import { v4 as uuid } from "uuid";
 import Alert from "../Alert/Alert";
+import Loader from "../Loader/Loader";
 
 export default class Admin extends Component {
   state = {
@@ -12,10 +12,14 @@ export default class Admin extends Component {
   }
   handleOnSubmit = (values) => {
     this.setState({ showAlert: true });
-    this.props.addMobile({ ...values, id: uuid() });
+    this.props.addMobile({ ...values });
   };
   render() {
     const { showAlert } = this.state;
+    const { loading } = this.props;
+    if (loading) {
+      return <Loader />;
+    }
     return (
       <div
         className="container border shadow p-4"

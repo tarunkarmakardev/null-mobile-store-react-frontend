@@ -15,7 +15,6 @@ const refreshToken = () => async (dispatch) => {
       JSON.stringify({ refresh })
     );
     localStorage.setItem("access", response.data.access);
-    localStorage.setItem("refresh", response.data.refresh);
     const userInfo = await mobileStore("/api/auth/user_info/", {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("access")}`,
