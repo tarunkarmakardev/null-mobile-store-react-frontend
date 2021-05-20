@@ -10,6 +10,6 @@ export default class Home extends Component {
     }
   }
   render() {
-    return <Redirect to="/admin" />;
+    return <Redirect to="/listing" />;
   }
 }

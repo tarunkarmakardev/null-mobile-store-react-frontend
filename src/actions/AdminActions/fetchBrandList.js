@@ -4,23 +4,15 @@ import {
   LOADING_TRUE,
   LOADING_FALSE,
 } from "../types";
-import { refreshToken } from "../AuthActions/refreshToken";
 import mobileStore from "../../api/mobileStore";
 
 const fetchBrandList = () => async (dispatch) => {
   dispatch({
     type: LOADING_TRUE,
   });
-  await dispatch(refreshToken());
-  const access = localStorage.getItem("access");
-  const headers = {
-    headers: {
-      Authorization: `Bearer ${access}`,
-    },
-  };
 
   try {
-    const response = await mobileStore("api/brands/", headers);
+    const response = await mobileStore("api/brands/");
     dispatch({
       type: FETCH_BRAND_LIST_SUCCESS,
       payload: response,

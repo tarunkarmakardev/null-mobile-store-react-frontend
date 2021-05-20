@@ -9,9 +9,13 @@ export default class NavBar extends Component {
     openMenu: false,
   };
   renderLinks = () => {
+    const {
+      signInState: { isSignedIn },
+    } = this.props;
     return (
       <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-        <NavLinkItem to="/admin" name="Admin" />
+        {isSignedIn && <NavLinkItem to="/admin" name="Admin" />}
+
         <NavLinkItem to="/listing" name="Listing" />
       </ul>
     );

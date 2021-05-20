@@ -4,9 +4,9 @@ import {
   LOADING_TRUE,
   LOADING_FALSE,
 } from "../types";
-import { refreshToken } from "../AuthActions/refreshToken";
 import mobileStore from "../../api/mobileStore";
 import { fetchBrandList } from "./fetchBrandList";
+// import { refreshToken } from "../AuthActions/refreshToken";
 
 const fetchMobileList =
   ({ brand = null, minPrice = null, maxPrice = null }) =>
@@ -14,17 +14,17 @@ const fetchMobileList =
     dispatch({
       type: LOADING_TRUE,
     });
-    await dispatch(refreshToken());
-    const access = localStorage.getItem("access");
     await dispatch(fetchBrandList());
-    const headers = {
-      headers: {
-        Authorization: `Bearer ${access}`,
-      },
-    };
+    // await dispatch(refreshToken());
+    // const access = localStorage.getItem("access");
+    // const headers = {
+    //   headers: {
+    //     Authorization: `Bearer ${access}`,
+    //   },
+    // };
 
     try {
-      const response = await mobileStore("/api/products/", headers);
+      const response = await mobileStore("/api/products/");
       let mobileList = response.data;
       if (brand) {
         mobileList = mobileList.filter((item) => {
